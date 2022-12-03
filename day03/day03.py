@@ -14,13 +14,30 @@ def score_item(item):
         return i - a + 1
 
 
+def common_item(lists):
+    target = len(lists)
+    items = dict()
+    for l in lists:
+        s = set(l)
+        for i in s:
+            if i in items.keys():
+                items[i] += 1
+            else:
+                items[i] = 1
+            if items[i] == target:
+                return i
+
+
 with open('input.txt') as input_data:
     total = 0
+    group = []
     for line in input_data.readlines():
         rucksack = [c for c in line.strip("\n")]
-        size = len(rucksack)
-        mid = int(size / 2)
-        item = find_item(rucksack[0:mid], rucksack[mid:size])
-        #print(item, score_item(item))
-        total += score_item(item)
-    print("Part1: ", total)
+        group.append(rucksack)
+        if len(group) == 3:
+            common = common_item(group)
+            group = []
+            total += score_item(common)
+            print(common, score_item(common))
+
+    print("Part2: ", total)
