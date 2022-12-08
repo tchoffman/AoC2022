@@ -9,8 +9,8 @@ def get_marker(signal, n=4):
         if len(set(signal[i-n:i])) == n:
             return i
 
-print("Part1:", get_marker(signal, 4))
 
+print("Part1:", get_marker(signal, 4))
 
 print("Part2:", get_marker(signal, 14))
 
